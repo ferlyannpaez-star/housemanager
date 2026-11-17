@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2f5d50">
+<title>Montalban Home Manager</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Home Manager">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+<div class="app">
+  <aside class="nav" id="nav"></aside>
+  <main class="main" id="main"></main>
+</div>
+<div id="modal-root"></div>
+<div id="toast" class="toast" hidden></div>
+<div id="print-root"></div>
+<style id="page-size"></style>
+<script src="js/recipe-book.js"></script>
+<script src="js/seed.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/payroll.js"></script>
+<script src="js/handbook-text.js"></script>
+<script src="js/phase4.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // Offline copy of the app files (sw.js). Only works when served (http/https), not when index.html is opened as a file.
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(e => console.warn('Service worker not registered', e)));
+  }
+</script>
+</body>
+</html>

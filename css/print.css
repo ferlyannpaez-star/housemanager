@@ -1,0 +1,117 @@
+/* Montalban Home Manager — print styles.
+   Loaded with media="print" by index.html, and as normal styles inside the print preview, so the preview
+   shows exactly what prints (works when the app is opened as a file, too). */
+body { background: #fff; }
+.app, #modal-root, .toast { display: none !important; }
+#print-root { display: block; color: #000; font-family: Arial, sans-serif; }
+.pg { page-break-after: always; break-after: page; padding: 0; }
+.pg:last-child { page-break-after: auto; break-after: auto; }
+.pg h1 { font-size: 15px; display: flex; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 4px; }
+.pg .who { font-size: 12px; margin-bottom: 6px; }
+.pg table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+.pg td, .pg th { border: 1px solid #d0d0d0; padding: 3px 5px; vertical-align: top; text-align: left; } /* light gridlines on every printed table */
+.pg .box { width: 14px; font-size: 13px; }
+.pg .fixed td { background: #eee; font-style: italic; }
+.pg .steps { font-size: 9.5px; color: #333; margin-top: 1px; }
+.pg .sig { display: flex; gap: 40px; margin-top: 18px; font-size: 12px; }
+.pg .sig div { flex: 1; border-top: 1px solid #000; padding-top: 3px; }
+.pg .note { font-size: 10.5px; margin: 4px 0; padding: 3px 6px; border: 1px solid #000; }
+.pg.week table { font-size: 9.5px; }
+.pg .cf-h { font-size: 12px; margin: 10px 0 2px; border-bottom: 1px solid #000; }
+.pg .cf-fill { font-size: 10px; margin: 6px 0 4px; }
+/* kasambahay payslip: two copies per page */
+.pg .slip { border: 1px solid #000; padding: 6px 8px; font-size: 9.5px; }
+.pg .slip-h { display: flex; justify-content: space-between; border-bottom: 1.5px solid #000; padding-bottom: 3px; margin-bottom: 4px; font-size: 12px; }
+.pg .slip-copy { font-size: 9px; border: 1px solid #000; padding: 0 4px; margin-left: 6px; }
+.pg .slip-sub { font-size: 8.5px; color: #333; font-weight: 400; }
+.pg .slip-info td { border: 0; padding: 1px 3px; font-size: 9.5px; }
+.pg .slip-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+.pg .slip-cols td, .pg .slip-cols th { font-size: 9px; padding: 2px 3px; }
+.pg .slip .amt { text-align: right; white-space: nowrap; }
+.pg .slip .tot td { font-weight: 700; border-top: 1px solid #000; }
+.pg .slip-net { text-align: right; font-size: 12px; margin: 5px 0 3px; border-top: 1.5px solid #000; padding-top: 3px; }
+.pg .slip .sig { margin-top: 14px; font-size: 9px; }
+.pg .slip-cut { text-align: center; font-size: 9px; color: #666; margin: 10px 0; letter-spacing: 1px; }
+.pg table.mgr td { font-size: 9.5px; }
+.pg table.mgr td, .pg table.mgr th { border: 1px solid #d0d0d0; }
+.pg table.mgr td.mg-busy { border-left: 2.5px solid #555; }
+.pg .mg-p { margin: 0 0 2px; }
+.pg .mg-end { color: #444; font-size: 8.5px; }
+/* printed week: a tick box in front of each task instead of a bullet */
+.pg .wk-list { margin: 0; padding-left: 0; list-style: none; }
+.pg .wk-list li { margin: 0 0 2px; padding-left: 12px; position: relative; }
+.pg .wk-list li::before { content: ''; position: absolute; left: 0; top: 1px; width: 7px; height: 7px; border: 1px solid #000; }
+.pg .month { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid #000; border-left: 1px solid #000; }
+.pg .month .mh { font-size: 10px; font-weight: 700; padding: 2px 4px; border-right: 1px solid #000; border-bottom: 1px solid #000; }
+.pg .month .mc { min-height: 70px; font-size: 8.5px; padding: 2px 3px; border-right: 1px solid #000; border-bottom: 1px solid #000; overflow: hidden; }
+.pg .month .mc.out { color: #888; }
+.pg .month .md { font-weight: 700; font-size: 10px; }
+.pg .month .mi { line-height: 1.25; }
+.pg .month .tag, .pg .month .dot { display: none; }
+/* every page: the column headings repeat, and rows are not split across pages (page title + number come from @page) */
+.pg thead { display: table-header-group; }
+.pg thead th { background: #eee; border-bottom: 1.5px solid #888; }
+.pg tr { break-inside: avoid; page-break-inside: avoid; }
+/* tall rows (a person's whole week; merged cells for a long task) may split — otherwise the printer pushes them to page 2 and leaves page 1 empty */
+.pg table.wk tr, .pg table.mgr tr, .pg table.wk td, .pg table.mgr td { break-inside: auto !important; page-break-inside: auto !important; }
+/* 7-day schedule: fixed equal day columns; long task names wrap instead of being cut */
+.pg table.wk { table-layout: fixed; }
+.pg table.wk th.wk-staff, .pg table.wk td.wk-staff { width: 62px; }
+.pg table.wk td, .pg table.wk th { overflow-wrap: anywhere; word-break: normal; border: 1px solid #d0d0d0; }
+.pg table.wk .wk-list li { line-height: 1.25; }
+.pg .wk-ns { font-weight: 400; font-size: 8.5px; }
+.pg .month .mc { break-inside: avoid; }
+/* one-page calendars: no page breaks inside; holidays and events in bold, spelled out */
+.pg.month { break-after: auto; page-break-after: auto; }
+.pg.month .month .mc { overflow: visible; min-height: 62px; }
+.pg .month .mi.hol { font-weight: 700; }
+.pg .month .mi.ev { font-weight: 600; }
+.pg .cal-k { font-weight: 400; font-size: 7.5px; }
+/* month calendar print: equal rows that fill the page, readable text, overflow as "+N more" */
+.pg.mprint .month .mc { min-height: 0; overflow: hidden; font-size: 9.5px; padding: 2px 4px; }
+.pg.mprint .month .md { font-size: 11px; line-height: 14px; }
+.pg.mprint .month .mi { line-height: 12.5px; overflow-wrap: anywhere; }
+.pg.mprint .month .mi.more { font-style: italic; color: #444; }
+.pg.month { display: block !important; }
+.pg.mprint .month .mi { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; } /* the page itself is not the grid — only its .month calendar is */
+.pg.mprint h1 { font-size: 16px; }
+.pg.mprint h1.mtitle { display: block !important; text-align: center; border-bottom: 1.5px solid #888; padding-bottom: 4px; margin: 0 0 6px; }
+.pg.mprint h1.mtitle .msub { font-size: 13px; font-weight: 600; margin-top: 2px; }
+.pg.week table td, .pg.week table th, .pg.week .wk-list li { font-size: 10pt !important; line-height: 1.25; }
+.pg.week .who { font-size: 10pt; }
+.pg.mprint .mfoot { font-size: 9px; margin-top: 4px; color: #333; }
+.pg.mprint .month { border-top: 1px solid #000; border-left: 1px solid #000; }
+.pg.mprint .month .mh { background: #e6e6e6; text-align: center; }
+.pg.mprint .month .mc.out { background: #f4f4f4; }
+.pg.mprint .month .mi.abs { font-weight: 700; }
+/* final print format: black on white — no coloured fills or bars; light grey gridlines only */
+.pg, .pg * { color: #000 !important; }
+.pg td, .pg th, .pg tr, .pg thead th, .pg .fixed td, .pg tr.group td, .pg tr.aisle td, .pg .month .mh, .pg .month .mc, .pg .month .mc.out,
+.pg td.mg-busy, .pg td.mg-free, .pg .chip, .pg .note, .pg .slip { background: transparent !important; box-shadow: none !important; }
+.pg td.mg-busy { border-left: 1px solid #d0d0d0 !important; }
+.pg table.mgr td { min-width: 0 !important; }
+.pg .chip { border: 1px solid #999; padding: 0 3px; }
+.pg .month .mc.out { color: #777 !important; }
+.pg .month, .pg .month .mh, .pg .month .mc { border-color: #d0d0d0 !important; }
+.pg thead th { border-bottom: 1.5px solid #888 !important; font-weight: 700; }
+.pg .fixed td, .pg tr.aisle td { font-weight: 700; }
+/* day schedule prints (staff checklists and manager's list) at 10 pt */
+.pg.daypg table td, .pg.daypg table th, .pg.mgr table td, .pg.mgr table th { font-size: 10pt !important; }
+.pg.daypg .steps { font-size: 9pt !important; } .pg.mgr .mg-end { font-size: 9pt !important; } .pg.daypg .who, .pg.mgr .who { font-size: 10pt; }
+/* Handbook print: cover, contents, sections (each main section on a new page), acknowledgment */
+.hb-doc.print { font-family: Georgia, Cambria, 'Times New Roman', serif; font-size: 11pt; line-height: 1.5; color: #000; }
+.hb-doc.print .hb-cover { background: none; color: #000; display: flex; align-items: center; justify-content: center; min-height: 230mm; text-align: center; padding: 0; border: 3px double #000; }
+.hb-doc.print .hb-cover h1 { font-size: 30pt; border: 0; display: block; margin: 14pt 0 10pt; padding: 0; }
+.hb-doc.print .hb-house { font-size: 12pt; letter-spacing: 4px; } .hb-doc.print .hb-ver { font-size: 12pt; } .hb-doc.print .hb-cover-note { font-size: 11pt; margin-top: 40pt; }
+.hb-doc.print .hb-tocpage { background: none; padding: 0; border: 0; }
+.hb-doc.print .hb-toc-h { font-size: 18pt; border-bottom: 1.5px solid #000; padding-bottom: 4pt; }
+.hb-doc.print .hb-toc-row { font-size: 11pt; padding: 1.5pt 0; } .hb-doc.print .hb-toc-row.l2 { padding-left: 18pt; }
+.hb-doc.print .hb-content { padding: 0; }
+.hb-doc.print .hb-sec.l1 { break-before: page; } .hb-doc.print .hb-sec.l1:first-child { break-before: auto; }
+.hb-doc.print .hb-sec h2 { font-size: 16pt; color: #000; border-bottom: 1.5px solid #000; margin: 0 0 8pt; display: block; justify-content: initial; }
+.hb-doc.print .hb-sec h3 { font-size: 12.5pt; margin: 12pt 0 4pt; break-after: avoid; } .hb-doc.print .hb-sec h4 { font-size: 11pt; break-after: avoid; }
+.hb-doc.print .hb-num { color: #000; }
+.hb-doc.print p, .hb-doc.print li { orphans: 3; widows: 3; } .hb-doc.print ul, .hb-doc.print ol { break-inside: auto; }
+.hb-doc.print .hb-ack h2 { font-size: 16pt; border-bottom: 1.5px solid #000; }
+.hb-doc.print .hb-sign { display: flex; gap: 18pt; margin-top: 26pt; } .hb-doc.print .hb-sign div { flex: 1; border-top: 1px solid #000; font-size: 9pt; padding-top: 2pt; }
+.hb-doc.print .hb-sign span { display: block; font-size: 11pt; margin-top: -16pt; height: 16pt; }
